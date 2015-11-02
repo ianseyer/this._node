@@ -36,7 +36,7 @@ exports.build = function(req, res){
       "code":           req.query.code
   }, function (err, facebookRes) {
     var buildNode = new Promise(function(fulfill, reject){
-      graph.get('/me', function(err, data){
+      graph.get('me?fields=picture.type(large),name,birthday,bio,work,education', function(err, data){
         if(err){reject(err)}
         Node.findOne({id:data.id}, function(err, result){
           if(err){reject(err)}
