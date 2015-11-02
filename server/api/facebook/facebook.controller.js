@@ -12,7 +12,7 @@ exports.auth = function(req, res){
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
       "client_id":     process.env.FB_ID,
-      "redirect_uri":  "http:/localhost:9000/api/facebooks/callback",
+      "redirect_uri":  "http://localhost:9000/api/facebooks/callback",
       "scope":         ['public_profile', 'user_friends', 'user_photos', 'email', 'user_events', 'user_hometown', 'user_photos', 'user_posts', 'user_likes', 'user_relationships']
     });
 
@@ -31,7 +31,7 @@ exports.auth = function(req, res){
 exports.build = function(req, res){
   graph.authorize({
       "client_id":      process.env.FB_ID,
-      "redirect_uri":   "http:/localhost:9000/api/facebooks/callback",
+      "redirect_uri":   "http://localhost:9000/api/facebooks/callback",
       "client_secret":  process.env.FB_SECRET,
       "code":           req.query.code
   }, function (err, facebookRes) {
@@ -60,7 +60,7 @@ exports.build = function(req, res){
         var loadUser = function(){
           graph.get('/me?limit=50&fields=picture,email,name,gender,age_range', ['picture'], function(err, results){
             if(err){console.log(err)}
-            console.log(results)
+            // console.log(results)
             node.profile = results
             node.save(function(err, result){
               if(err){console.log(err)}
@@ -81,7 +81,7 @@ exports.build = function(req, res){
         var loadLikes = function(){
           graph.get('/me/likes', SCHEMA.SCHEMA['likes'].fields, function(err, results){
             if(err){console.log(err)}
-            console.log(results)
+            // console.log(results)
             for(var index in results){
               node.likes.push(results[index])
               node.save(function(err){
@@ -93,7 +93,7 @@ exports.build = function(req, res){
         var loadFriends = function(){
           graph.get('/me/friends?limit=200', function(err, results){
             if(err){console.log(err)}
-            console.log(results)
+            // console.log(results)
             for(var index in results){
               node.likes.push(results[index])
               node.save(function(err){
@@ -121,6 +121,7 @@ exports.build = function(req, res){
             for(var index in results){
               node.photos.push(results[index])
             }
+            // console.log(node.photos)
             node.save(function(err){
               if(err){console.log(err)}
             })

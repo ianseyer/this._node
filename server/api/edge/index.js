@@ -12,5 +12,6 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
+router.get('/build', controller.build);
 
 module.exports = router;

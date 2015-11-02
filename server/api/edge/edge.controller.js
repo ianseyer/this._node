@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Edge = require('./edge.model');
+var Node = require('../node/node.model')
+var calculateEdge = require('../node/node.controller').calculateEdge;
 
 // Get list of edges
 exports.index = function(req, res) {
@@ -39,6 +41,20 @@ exports.create = function(req, res) {
     }
   })
 };
+
+exports.build = function(req, res) {
+  Node.find()
+  .then(function(nodes){
+    console.log(nodes)
+    for(var index = 0; index<nodes.length; index++){
+      var node = nodes[index]
+      calculateEdge.photos(node)
+      calculateEdge.friends(node)
+      calculateEdge.posts(node)
+    }
+    return res.send('thanks')
+  })
+}
 
 // Updates an existing edge in the DB.
 exports.update = function(req, res) {

@@ -10,7 +10,7 @@ var createGhostNode = function(id){
   */
   Node.find({id:id}, null, function(err, nodes){
     if(err){console.log(err)}
-    if(!node){
+    if(!nodes){
       Node.create(id, function(err, node){
         if(err){console.log(err)}
         console.log("ghost node: "+node)
