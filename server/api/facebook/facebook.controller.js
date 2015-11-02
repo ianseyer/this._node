@@ -12,7 +12,7 @@ exports.auth = function(req, res){
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
       "client_id":     process.env.FB_ID,
-      "redirect_uri":  "http://thisnode.herokuapp.com/api/facebooks/callback",
+      "redirect_uri":  "http:/localhost:9000/api/facebooks/callback",
       "scope":         ['public_profile', 'user_friends', 'user_photos', 'email', 'user_events', 'user_hometown', 'user_photos', 'user_posts', 'user_likes', 'user_relationships']
     });
 
@@ -31,7 +31,7 @@ exports.auth = function(req, res){
 exports.build = function(req, res){
   graph.authorize({
       "client_id":      process.env.FB_ID,
-      "redirect_uri":   "http://thisnode.herokuapp.com/api/facebooks/callback",
+      "redirect_uri":   "http:/localhost:9000/api/facebooks/callback",
       "client_secret":  process.env.FB_SECRET,
       "code":           req.query.code
   }, function (err, facebookRes) {
