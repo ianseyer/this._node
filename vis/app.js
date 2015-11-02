@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(__dirname + '/public/tacos/favicon.ico'));
+app.use(favicon(path.join(config.root, 'public', '/favicon.ico')));
 app.use('/', routes);
 app.use('/users', users);
 
