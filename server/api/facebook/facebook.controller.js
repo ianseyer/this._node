@@ -12,7 +12,7 @@ exports.auth = function(req, res){
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
       "client_id":     process.env.FB_ID,
-      "redirect_uri":  "http://localhost:9000/api/facebooks/callback",
+      "redirect_uri":  "http://thisnode.herokuapp.com/api/facebooks/callback",
       "scope":         ['public_profile', 'user_friends', 'user_photos', 'email', 'user_events', 'user_hometown', 'user_photos', 'user_posts', 'user_likes', 'user_relationships']
     });
 
@@ -31,7 +31,7 @@ exports.auth = function(req, res){
 exports.build = function(req, res){
   graph.authorize({
       "client_id":      process.env.FB_ID,
-      "redirect_uri":   "http://localhost:9000/api/facebooks/callback",
+      "redirect_uri":   "http://thisnode.herokuapp.com/api/facebooks/callback",
       "client_secret":  process.env.FB_SECRET,
       "code":           req.query.code
   }, function (err, facebookRes) {
@@ -68,7 +68,7 @@ exports.build = function(req, res){
           })
         }
         var loadEvents = function(){
-          graph.get('/me/events&limit=50', SCHEMA.SCHEMA['events'].fields, function(err, results){
+          graph.get('/me/events?limit=50', SCHEMA.SCHEMA['events'].fields, function(err, results){
             if(err){console.log(err)}
             for(var index in results){
               node.events.push(results[index])
