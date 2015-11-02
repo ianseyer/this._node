@@ -19,6 +19,14 @@ exports.findTo = function(req, res) {
     return res.json(edge);
   });
 };
+
+exports.findToType = function(req, res) {
+  Edge.find({to:req.params.id, type: req.params.type})
+  .then(function(edges){
+    return res.json(edges)
+  })
+}
+
 // Creates a new edge in the DB.
 exports.create = function(req, res) {
   Edge.findOne({to:req.body.to, from:req.body.to, type:req.body.type, meta:req.body.meta})

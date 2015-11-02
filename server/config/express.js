@@ -32,7 +32,7 @@ module.exports = function(app) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', path.join(config.root, 'public'));
-    app.use(morgan('dev'));
+    app.use(morgan('dev'));v
   }
 
   if ('development' === env || 'test' === env) {
