@@ -15,6 +15,6 @@ router.get('/:id/photos', controller.showPhotos)
 router.get('/:id/events', controller.showEvents)
 router.get('/:id/posts', controller.showPosts)
 router.get('/:id/likes', controller.showLikes)
-
+router.get('/:id/eigen', controller.eigen)
 
 module.exports = router;
